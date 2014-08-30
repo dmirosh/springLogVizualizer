@@ -3,7 +3,8 @@
         var ejs = require('ejs-locals'),
             path = require('path'),
             config = require('../config'),
-            router = require('../routes');
+            router = require('../routes'),
+            mongoose = require('../utils/mongoose');
 
         /**
          * Page Rendering

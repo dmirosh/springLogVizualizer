@@ -5,5 +5,6 @@
     module.exports = function (app) {
         app.get("/", indexController.home);
         app.get("/api/mappings", mappingInfoController.getAll);
+        app.get("/refresh", mappingInfoController.refreshMappingInfo);
     };
 })();
