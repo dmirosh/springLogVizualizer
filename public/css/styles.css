@@ -8,3 +8,7 @@
 .table tbody tr:hover td, .table tbody tr:hover th {
     background-color: lightskyblue;
 }
+
+/*for controllers filter panel*/
+.bot-links{float: left; width: 100%; padding-top: 10px;}
+.bot-links a{display: inline-block; padding: 5px; background: #ccc; font-size: 12px;margin-right:10px; color: black; text-decoration:none;}

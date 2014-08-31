@@ -23,8 +23,14 @@
         </div>
     </div>
     <div class="row">
+        <div class="bot-links col-lg-12">
+            <strong>Controllers:</strong>
+            <a ng-repeat="controller in controllersList" ng-click="toggleControllerFilter(controller)" href="#">{{controller}}</a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-12">
-            <p>Selected url: <strong>{{selectedUrl}}</strong></p>
+            <p><strong>Selected url: </strong>{{selectedUrl}}</p>
         </div>
     </div>
     <div class="row">
@@ -41,7 +47,7 @@
                 <tbody>
                 <tr ng-repeat="mapping in mappings | orderBy:sortOrder:reverse| startFrom:(currentPage -1)*pageSize | limitTo:pageSize" ng-mouseleave="$parent.selectedUrl=''" ng-mouseover="$parent.selectedUrl=mapping.url" >
                     <td>{{mapping.url | limitTo:15}}</td>
-                    <td>{{mapping.handlerClassShort}}</td>
+                    <td ng-click="toggleControllerFilter(mapping.handlerClassShort)">{{mapping.handlerClassShort}}</td>
                     <td>{{mapping.handlerMethod}}</td>
                     <td>{{mapping.handlerParamsShort}}</td>
                 </tr>

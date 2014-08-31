@@ -7,8 +7,18 @@ angular.module('SpringLogs', ['ui.bootstrap'])
         $scope.totalMappings = 0;
         $scope.sortOrder = "url";
         $scope.reverse = false;
+        $scope.controllersList = [];
 
 
+
+        $scope.toggleControllerFilter = function(controllerName) {
+            var index = $scope.controllersList.indexOf(controllerName);
+            if ( index !== -1) {
+                $scope.controllersList.splice(index,1);
+            } else {
+                $scope.controllersList.push(controllerName);
+            }
+        };
 //        watch for url search input
         $scope.$watch("urlQuery", function (newQuery) {
             $scope.mappings = $filter("urlFilter")(allMappings, newQuery);
