@@ -2,3 +2,9 @@
     margin-top: 25px;
     margin-bottom: 25px;
 }
+#urlMappingsTable th{
+    cursor: pointer;
+}
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color: lightskyblue;
+}

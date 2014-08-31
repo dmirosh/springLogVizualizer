@@ -1,4 +1,4 @@
-angular.module('SpringLogs', [])
+angular.module('SpringLogs', ['ui.bootstrap'])
     .controller('MainCtrl', ["$scope", "$http", function ($scope, $http) {
         var allMappings = null;
         $http.get("api/mappings")
