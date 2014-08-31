@@ -39,7 +39,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-mouseleave="$parent.selectedUrl=''" ng-mouseover="$parent.selectedUrl=mapping.url" ng-repeat="mapping in mappings | urlFilter:urlQuery | orderBy:sortOrder:reverse">
+                <tr ng-repeat="mapping in mappings | orderBy:sortOrder:reverse| startFrom:(currentPage -1)*pageSize | limitTo:pageSize" ng-mouseleave="$parent.selectedUrl=''" ng-mouseover="$parent.selectedUrl=mapping.url" >
                     <td>{{mapping.url | limitTo:15}}</td>
                     <td>{{mapping.handlerClassShort}}</td>
                     <td>{{mapping.handlerMethod}}</td>
@@ -47,6 +47,7 @@
                 </tr>
                 </tbody>
             </table>
+            <pagination total-items="totalMappings" items-per-page="pageSize" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
         </div>
     </div>
 </div>
