@@ -1,7 +1,7 @@
 (function () {
     var MappingInfo = require("../models/mappingInfo"),
         _ = require("../public/vendor/underscore");
-    var pattern = /^.* - Mapped "{\[(.*)\],methods=\[(.*)\],params=\[(.*)\],headers=\[(.*)\],consumes=\[(.*)\],produces=\[(.*)\],custom=\[(.*)\]}" onto (\w+) (\w+)\s*([^(]+)\(([^)]+)\)(?: throws (.+))?.*$/;
+    var pattern = /^.* -\s+Mapped\s+"{\[(.*)\],methods=\[(.*)\],params=\[(.*)\],headers=\[(.*)\],consumes=\[(.*)\],produces=\[(.*)\],custom=\[(.*)\]}"\s+onto\s+(?:([a-zA-Z_0-9.]+)\s+)*([a-zA-Z_0-9.<>, ]+)\s+([a-zA-Z_0-9.]+)\s*\(([^)]*)\)(?:\s+throws\s+(.+))?.*$/;
 
     var extractUrlInfoFromFile = function (fileName, callback) {
         var lazy = require("lazy"),
