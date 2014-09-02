@@ -1,11 +1,11 @@
-"use strict"
+"use strict";
 angular.module('SpringLogs')
     .service("mappingInfoService", function ($http, $q) {
         var mappingsInfo = null; //cached list of all mappings
 
         this.getAllMappings = function () {
             var res = $q.defer();
-            if(!mappingsInfo) {
+            if (!mappingsInfo) {
                 $http.get("api/mappings")
                     .success(function (response) {
                         //caching response
@@ -19,9 +19,9 @@ angular.module('SpringLogs')
         };
         this.getFilteredMappings = function (filters) {
             var res = $q.defer();
-            if(!mappingsInfo) {
-                this.getAllMappings().then(function() {
-                   res.resolve(_filter(mappingsInfo, filters));
+            if (!mappingsInfo) {
+                this.getAllMappings().then(function () {
+                    res.resolve(_filter(mappingsInfo, filters));
                 });
             } else {
                 res.resolve(_filter(mappingsInfo, filters));
@@ -29,17 +29,24 @@ angular.module('SpringLogs')
             return res.promise;
         };
         function _filter(mappingsList, filters) {
-            if(!mappingsList) {
+            if (!mappingsList) {
                 return mappingsList;
             }
-            var queryRegExp = filters.query ? new RegExp(["^.*",filters.query,".*$"].join("")) : null;
+            var queryRegExp = null;
+            if(filters.query) {
+                try {
+                    queryRegExp = new RegExp(filters.query, "i");
+                } catch(e) {
+                    return [];
+                }
+            }
             return _.filter(mappingsList, function (item) {
                 var queryMatches = true;
-                if(queryRegExp) {
+                if (queryRegExp) {
                     queryMatches = queryRegExp.test(item.url);
                 }
                 var controllersMatches = true;
-                if(filters.controllers.length) {
+                if (filters.controllers.length) {
                     controllersMatches = _.contains(filters.controllers, item.handlerClassShort);
                 }
                 return queryMatches && controllersMatches;
