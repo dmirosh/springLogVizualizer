@@ -19,13 +19,13 @@
     </div>
     <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
-            <input type="text" class="form-control" ng-model="urlQuery" placeholder="Search url"/>
+            <input type="search" class="form-control" ng-model="filters.query" placeholder="Search url"/>
         </div>
     </div>
     <div class="row">
         <div class="bot-links col-lg-12">
             <strong>Controllers:</strong>
-            <a ng-repeat="controller in controllersList" ng-click="toggleControllerFilter(controller)" href="#">{{controller}}</a>
+            <a ng-repeat="controller in filters.controllers" ng-click="toggleControllerFilter(controller)" href="#">{{controller}}</a>
         </div>
     </div>
     <div class="row">
@@ -68,5 +68,7 @@
 <script src="../public/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="../public/vendor/underscore/underscore-min.js"></script>
 <script src="../public/app/app.js"></script>
+<script src="../public/app/services.js"></script>
+<script src="../public/app/filters.js"></script>
 </body>
 </html>

@@ -1,51 +1,38 @@
 "use strict"
 angular.module('SpringLogs', ['ui.bootstrap'])
-    .controller('MainCtrl', function ($scope, $http, $filter) {
-        var allMappings = null;
+    .controller('MainCtrl', ["$scope", "$filter", "mappingInfoService", function ($scope, $filter, mappingInfoService) {
+        function onListUpdated(mappingsList) {
+            $scope.mappings = mappingsList;
+            $scope.totalMappings = $scope.mappings.length;
+            $scope.currentPage = 1;
+        }
+
+         mappingInfoService.getAllMappings().then(onListUpdated);
+        //page data
         $scope.currentPage = 1;
         $scope.pageSize = 7;
         $scope.totalMappings = 0;
+        //sort data
         $scope.sortOrder = "url";
         $scope.reverse = false;
-        $scope.controllersList = [];
-
-
-
+        //filters
+        $scope.filters = {
+            query: "",
+            controllers: []
+        };
+        //add\remove controller as filters
         $scope.toggleControllerFilter = function(controllerName) {
-            var index = $scope.controllersList.indexOf(controllerName);
-            if ( index !== -1) {
-                $scope.controllersList.splice(index,1);
+            if(_.contains($scope.filters.controllers, controllerName)) {
+                $scope.filters.controllers = _.without($scope.filters.controllers, controllerName);
             } else {
-                $scope.controllersList.push(controllerName);
+                $scope.filters.controllers.push(controllerName);
             }
         };
-//        watch for url search input
-        $scope.$watch("urlQuery", function (newQuery) {
-            $scope.mappings = $filter("urlFilter")(allMappings, newQuery);
-            $scope.currentPage = 1;
-            $scope.totalMappings = $scope.mappings.length;
-        });
+        //when filters changed requesting new mappings list from service
+        $scope.$watch("filters", function (newFilters, oldFilters) {
+            if(newFilters !== oldFilters) { //if not initial call
+                mappingInfoService.getFilteredMappings(newFilters).then(onListUpdated);
+            }
+        }, true);
+    }]);
 
-        $http.get("api/mappings")
-            .success(function (mappingsList) {
-                allMappings = $scope.mappings = mappingsList;
-                $scope.totalMappings = $scope.mappings.length;
-            })
-            .error(function () {
-                console.log("can't get data from server");
-            });
-    })
-    .filter("urlFilter", function () {
-        return function (items, query) {
-            var pattern = new RegExp(query, "i");
-            return _.filter(items, function (item) {
-                return pattern.test(item.url);
-            });
-        }
-    })
-    .filter('startFrom', function () {
-        return function (input, start) {
-            start = +start; //parse to int
-            return input.slice(start);
-        };
-    });
