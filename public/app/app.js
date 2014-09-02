@@ -10,7 +10,7 @@ angular.module('SpringLogs', ['ui.bootstrap'])
          mappingInfoService.getAllMappings().then(onListUpdated);
         //page data
         $scope.currentPage = 1;
-        $scope.pageSize = 7;
+        $scope.pageSize = 10;
         $scope.totalMappings = 0;
         //sort data
         $scope.sortOrder = "url";
