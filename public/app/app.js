@@ -1,19 +1,30 @@
 "use strict";
 angular.module('SpringLogs', ['ui.bootstrap'])
     .controller('MainCtrl', ["$scope", "$filter", "mappingInfoService", function ($scope, $filter, mappingInfoService) {
+
         function onListUpdated(mappingsList) {
             $scope.mappings = mappingsList;
             $scope.totalMappings = $scope.mappings.length;
             $scope.currentPage = 1;
+            return mappingsList;
         }
-        mappingInfoService.getAllMappings().then(onListUpdated);
+        mappingInfoService.getAllMappings().then(onListUpdated).then(function (mappingsList) {
+            $scope.controllers = _.uniq(_.pluck(mappingsList, "handlerClassShort")).sort();
+        });
+
+        // for controller select input
+        $scope.selectedController = undefined;
+        $scope.controllers = [];
+
         //page data
         $scope.currentPage = 1;
-        $scope.pageSize = 10;
+        $scope.pageSize = 8;
         $scope.totalMappings = 0;
+
         //sort data
         $scope.sortOrder = "url";
         $scope.reverse = false;
+
         //filters
         $scope.filters = {
             query: "",
@@ -27,6 +38,7 @@ angular.module('SpringLogs', ['ui.bootstrap'])
                 $scope.filters.controllers.push(controllerName);
             }
         };
+
         //when filters changed requesting new mappings list from service
         $scope.$watch("filters", function (newFilters, oldFilters) {
             if (newFilters !== oldFilters) { //if not initial call
