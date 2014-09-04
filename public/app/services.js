@@ -13,7 +13,7 @@ angular.module('SpringLogs')
                         res.resolve(mappingsInfo);
                     });
             } else {
-                res.resolve(mappingInfos);
+                res.resolve(mappingsInfo);
             }
             return res.promise;
         };

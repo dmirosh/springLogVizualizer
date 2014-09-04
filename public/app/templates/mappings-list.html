@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Url mappings</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <input type="search" class="form-control" ng-model="filters.query" placeholder="URL pattern"/>
+    </div>
+    <div class="col-lg-4 col-lg-offset-4 controllerSelect">
+        <input type="text" ng-model="selectedController"
+               typeahead="controller for controller in controllers | filter:$viewValue" typeahead-min-length="3"
+               typeahead-on-select="toggleControllerFilter($item);selectedController=''" class="form-control"
+               placeholder="Controller pattern"/>
+    </div>
+</div>
+<div class="row">
+    <div class="bot-links col-lg-12">
+        <strong>Controllers:</strong>
+        <a ng-repeat="controller in filters.controllers" ng-click="toggleControllerFilter(controller)" href="#">{{controller}}</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p><strong>Selected url: </strong>{{selectedUrl}}</p>
+    </div>
+    <div class="col-lg-12">
+        <p><strong>Total mappings: </strong>{{mappings.length}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table id="urlMappingsTable" class="table table-striped table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <th ng-click="sortOrder= 'httpMethods';reverse=!reverse;currentPage=1">Type</th>
+                <th ng-click="sortOrder= 'url';reverse=!reverse;currentPage=1">URL</th>
+                <th ng-click="sortOrder= 'handlerClassShort';reverse=!reverse;currentPage=1">Handler</th>
+                <th>params</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="mapping in mappings | orderBy:sortOrder:reverse| startFrom:(currentPage -1)*pageSize | limitTo:pageSize"
+                ng-mouseleave="$parent.selectedUrl=''" ng-mouseover="$parent.selectedUrl=mapping.url">
+                <td>{{mapping.httpMethods.join(",")}}</td>
+                <td>{{mapping.url | limitTo:80}}</td>
+                <td>
+                    <div ng-click="toggleControllerFilter(mapping.handlerClassShort)" class="handlerClass">
+                        {{mapping.handlerClassShort}}
+                    </div>
+                    <div class="handlerMethod">{{mapping.handlerMethod}}</div>
+                </td>
+                <td>{{mapping.handlerParamsShort.join(", ")}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <pagination total-items="totalMappings" items-per-page="pageSize" ng-model="currentPage" max-size="5"
+                    class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+    </div>
+</div>
