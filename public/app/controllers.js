@@ -52,5 +52,6 @@ angular.module('SpringLogs')
 
     .controller("GraphCtrl", ["$scope",
         function ($scope) {
-            $scope.message = "TBD";
+            $scope.showControllers = true;
+            $scope.showMethods = true;
         }]);

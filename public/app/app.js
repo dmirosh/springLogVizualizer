@@ -1,5 +1,5 @@
 "use strict";
-angular.module('SpringLogs', ['ui.bootstrap', 'ngRoute'])
+angular.module('SpringLogs', ['ngRoute', 'ngAnimate', 'ui.bootstrap' ])
     .config(['$routeProvider',
         function($routeProvider) {
             $routeProvider
