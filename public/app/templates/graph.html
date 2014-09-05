@@ -3,18 +3,28 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Http methods</h3>
-                <span ng-click="showMethods = !showMethods" class="pull-right clickable"><i ng-class="{'glyphicon-chevron-up': showMethods,'glyphicon-chevron-down': !showMethods}" class="glyphicon"></i></span>
+                <span ng-click="showMethods = !showMethods" class="pull-right clickable"><i
+                        ng-class="{'glyphicon-chevron-up': showMethods,'glyphicon-chevron-down': !showMethods}"class="glyphicon"></i>
+                </span>
             </div>
-            <div ng-show="showMethods" class="panel-body">TBD</div>
+            <div ng-show="showMethods" class="panel-body">
+                <bar-chart chart-data="methodsChart"></bar-chart>
+            </div>
         </div>
     </div>
+</div>
+<div class="row graph-row">
     <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Controllers</h3>
-                <span ng-click="showControllers = !showControllers" class="pull-right clickable"><i ng-class="{'glyphicon-chevron-up': showControllers,'glyphicon-chevron-down': !showControllers}" class="glyphicon"></i></span>
+                <span ng-click="showControllers = !showControllers" class="pull-right clickable">
+                        <i ng-class="{'glyphicon-chevron-up': showControllers,'glyphicon-chevron-down': !showControllers}" class="glyphicon"></i>
+                </span>
             </div>
-            <div ng-show="showControllers" class="panel-body">TBD</div>
+            <div ng-show="showControllers" class="panel-body">
+                <bar-chart chart-data="controllersChart"></bar-chart>
+            </div>
         </div>
     </div>
 </div>
