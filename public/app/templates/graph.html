@@ -1,5 +1,6 @@
 <div class="row graph-row">
-    <div class="col-md-6">
+    <!--panel for http methods bar-->
+    <div class="col-md-12">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Http methods</h3>
@@ -8,13 +9,14 @@
                 </span>
             </div>
             <div ng-show="showMethods" class="panel-body">
-                <bar-chart chart-data="methodsChart"></bar-chart>
+                <bar-chart width="960" height="200" left-margin="50" chart-data="methodsChart"></bar-chart>
             </div>
         </div>
     </div>
 </div>
 <div class="row graph-row">
-    <div class="col-md-6">
+    <!--panel for controllers bar-->
+    <div class="col-md-12">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Controllers</h3>
@@ -23,7 +25,7 @@
                 </span>
             </div>
             <div ng-show="showControllers" class="panel-body">
-                <bar-chart chart-data="controllersChart"></bar-chart>
+                <bar-chart width="960" height="2400" left-margin="200" chart-data="controllersChart"></bar-chart>
             </div>
         </div>
     </div>
