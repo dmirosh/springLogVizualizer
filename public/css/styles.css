@@ -154,27 +154,33 @@ http://bootsnipp.com/snippets/featured/triangle-breadcrumbs-arrows */
 
 
 /*chart*/
-.chart {
-    background: #eee;
-    padding: 3px;
+.bar {
+    fill: steelblue;
+}
+.axis text {
+    font: 14px sans-serif;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.y.axis path, .y.axis line {
+    display: none;
+}
+.bar:hover {
+    fill: orangered ;
+}
+/*tooltip*/
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
 }
 
-.chart div {
-    width: 0;
-    transition: all 1s ease-out;
-    -moz-transition: all 1s ease-out;
-    -webkit-transition: all 1s ease-out;
-}
-
-.chart div {
-    font: 10px sans-serif;
-    background-color: steelblue;
-    text-align: right;
-    padding: 3px;
-    margin: 5px;
-    color: white;
-    box-shadow: 2px 2px 2px #666;
-}
 
 /*panels*/
 .graph-row {
@@ -183,7 +189,6 @@ http://bootsnipp.com/snippets/featured/triangle-breadcrumbs-arrows */
 .clickable{
     cursor: pointer;
 }
-
 .panel-heading span {
     margin-top: -20px;
     font-size: 15px;
