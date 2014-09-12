@@ -11,6 +11,10 @@ angular.module('SpringLogs', ['ngRoute', 'ngAnimate', 'ui.bootstrap' ])
                     templateUrl: '/public/app/templates/graph.html',
                     controller: 'GraphCtrl'
                 })
+                .when('/upload', {
+                    templateUrl: '/public/app/templates/upload.html',
+                    controller: 'LogfileCtrl'
+                })
                 .otherwise({
                     redirectTo: '/mappings'
                 });

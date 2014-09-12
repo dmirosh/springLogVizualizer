@@ -95,4 +95,20 @@ angular.module('SpringLogs')
                 return {name: controller, val: mappings.length};
             });
         }
-    });
+    })
+    .service("logDataService", ["$http", "$q", function ($http, $q) {
+        var logFileInfo = null;
+        this.getLogFileInfo = function () {
+            var res = $q.defer();
+            if(logFileInfo) {
+                res.resolve(logFileInfo);
+            } else {
+                $http.get("api/logfile")
+                    .success(function (response) {
+                       logFileInfo = response;
+                        res.resolve(response);
+                    });
+            }
+            return res.promise;
+        }
+    }]);

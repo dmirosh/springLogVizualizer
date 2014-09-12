@@ -60,4 +60,14 @@ angular.module('SpringLogs')
             mappingInfoService.getChartData("controllers").then(function (chartData) {
                 $scope.controllersChart = _.sortBy(chartData, "name");
             });
-        }]);
+        }])
+    .controller("LogfileCtrl", ["$scope", "logDataService", function ($scope, logDataService) {
+        $scope.logFileInfo = {
+            uploadDate: "never",
+            fileName: "",
+            fileSize: ""
+        };
+        logDataService.getLogFileInfo().then(function (logFileInfo) {
+           $scope.logFileInfo = logFileInfo;
+        });
+    }]);
